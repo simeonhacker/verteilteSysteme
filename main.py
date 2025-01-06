@@ -5,6 +5,7 @@ def getDataFromWeb():
     pass
 
 def writeDataToDB():
+    # Parse CSV File an dwrite to respective tables / Columns in DB
     pass
 
 def createTables():
@@ -17,3 +18,6 @@ def createTables():
 
 
     queries = [genders, nationalities, sectors, status]
+
+def connectToDB():
+    pass
