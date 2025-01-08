@@ -71,6 +71,7 @@ def writeDataToDB():
 
 def createTables():
     # Simeon
+    cursor = connectToDB()
     genders = '''
         CREATE TABLE GENDERS (
             id INT NOT NULL AUTO_INCREMENT,
@@ -116,7 +117,12 @@ def createTables():
 
     queries = [genders, nationalities, sectors, statuses, dataEntries]
 
-    return queries
+    for query in queries:
+        cursor.execute(query)
+
+    cursor.connection.commit()  
+    cursor.close()
+    cursor.connection.close()
 
 def connectToDB():
     try:
@@ -126,3 +132,8 @@ def connectToDB():
     except Error as e:
         print(f"Error connecting to MySQL Database: {e}")
         return None
+        
+if __name__ == "__main__":
+    createTables()
+    getDataFromWeb()
+    writeDataToDB()
