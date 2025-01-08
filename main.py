@@ -126,7 +126,13 @@ def createTables():
 
 def connectToDB():
     try:
-        connection = mysql.connector.connect(**connectionDetails)
+        connection = mysql.connector.connect(
+            host=connectionDetails['host'],
+            user=connectionDetails['user'],
+            password=connectionDetails['password'],
+            database=connectionDetails['database'],
+            allow_local_infile=True
+        )
         if connection.is_connected():
             return connection.cursor()
     except Error as e:
