@@ -1,6 +1,6 @@
 connectionDetails = {
-    'host': 'localhost',
+    'host': 'hacker',
     'user': 'root',
     'password': 'root',
-    'database': 'employment_db'
+    'database': 'data_bank',
 }
