@@ -1,7 +1,6 @@
 import csv
 import requests
-import mysql.connector
-from mysql.connector import Error
+import MySQLdb
 from dataBankSettings import connectionDetails
 
 def getDataFromWeb():
@@ -30,40 +29,36 @@ def writeDataToDB():
     # Insert distinct values and get id mappings
     gender_map = {}
     for gender in distinct_genders:
-        cursor.execute("INSERT INTO GENDERS (gender) VALUES (%s)", (gender,))
-        cursor.execute("SELECT LAST_INSERT_ID()")
-        gender_map[gender] = cursor.fetchone()[0]
+        cursor.execute("INSERT INTO GENDERS (gender) VALUES (%s)", [gender])
+        gender_map[gender] = cursor.connection.insert_id()
 
     status_map = {}
     for status in distinct_statuses:
-        cursor.execute("INSERT INTO STATUS (status) VALUES (%s)", (status,))
-        cursor.execute("SELECT LAST_INSERT_ID()")
-        status_map[status] = cursor.fetchone()[0]
+        cursor.execute("INSERT INTO STATUS (status) VALUES (%s)", [status])
+        status_map[status] = cursor.connection.insert_id()
 
     nationality_map = {}
     for nationality in distinct_nationalities:
-        cursor.execute("INSERT INTO NATIONALITIES (nationality) VALUES (%s)", (nationality,))
-        cursor.execute("SELECT LAST_INSERT_ID()")
-        nationality_map[nationality] = cursor.fetchone()[0]
+        cursor.execute("INSERT INTO NATIONALITIES (nationality) VALUES (%s)", [nationality])
+        nationality_map[nationality] = cursor.connection.insert_id()
 
     sector_map = {}
     for sector in distinct_sectors:
-        cursor.execute("INSERT INTO SECTORS (sector) VALUES (%s)", (sector,))
-        cursor.execute("SELECT LAST_INSERT_ID()")
-        sector_map[sector] = cursor.fetchone()[0]
+        cursor.execute("INSERT INTO SECTORS (sector) VALUES (%s)", [sector])
+        sector_map[sector] = cursor.connection.insert_id()
 
     # Insert main data
     for row in data:
         cursor.execute("""
             INSERT INTO DATA_ENTRIES (status, sector, year, gender, value)
             VALUES (%s, %s, %s, %s, %s)
-        """, (
+        """, [
             status_map[row['status']],
             sector_map[row['sector']],
             int(row['year']),
             gender_map[row['gender']],
             int(row['value'])
-        ))
+        ])
 
     cursor.connection.commit()
     cursor.close()
@@ -126,16 +121,15 @@ def createTables():
 
 def connectToDB():
     try:
-        connection = mysql.connector.connect(
+        connection = MySQLdb.connect(
             host=connectionDetails['host'],
             user=connectionDetails['user'],
-            password=connectionDetails['password'],
-            database=connectionDetails['database'],
-            allow_local_infile=True
+            passwd=connectionDetails['password'],
+            db=connectionDetails['database'],
+            local_infile=1
         )
-        if connection.is_connected():
-            return connection.cursor()
-    except Error as e:
+        return connection.cursor()
+    except MySQLdb.Error as e:
         print(f"Error connecting to MySQL Database: {e}")
         return None
         
