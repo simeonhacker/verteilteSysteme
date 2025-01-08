@@ -1,5 +1,8 @@
 import csv
 import requests
+import mysql.connector
+from mysql.connector import Error
+from dataBankSettings import connectionDetails
 
 def getDataFromWeb():
     # Simeon
@@ -115,12 +118,7 @@ def createTables():
 
 def connectToDB():
     try:
-        connection = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="root",
-            database="employment_db"
-        )
+        connection = mysql.connector.connect(**connectionDetails)
         if connection.is_connected():
             return connection.cursor()
     except Error as e:
