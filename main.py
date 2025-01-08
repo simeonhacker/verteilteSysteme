@@ -113,6 +113,8 @@ def createTables():
 
     queries = [genders, nationalities, sectors, statuses, dataEntries]
 
+    return queries
+
 def connectToDB():
     try:
         connection = mysql.connector.connect(
