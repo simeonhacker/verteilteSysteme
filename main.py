@@ -119,8 +119,10 @@ def createTables():
     
     for query in queries:
         connection = connectToDB()
-        connection.execute(query)
-        connection.connection.commit()  
+        cursor = connection.cursor()
+        cursor.execute(query)
+        connection.commit()
+        cursor.close()  
         connection.close()
         #connection.connection.close()
 
