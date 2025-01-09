@@ -12,7 +12,8 @@ def getDataFromWeb():
         file.write(request.content)
 
 def writeDataToDB():
-    cursor = connectToDB()
+    connection = connectToDB()
+    cursor = connection.cursor()
     if not cursor:
         return
 
@@ -115,7 +116,6 @@ def createTables():
     '''
 
     queries = [genders, nationalities, sectors, statuses, dataEntries]
-    print('Line 119')
     
     for query in queries:
         connection = connectToDB()
@@ -124,10 +124,6 @@ def createTables():
         connection.commit()
         cursor.close()  
         connection.close()
-        #connection.connection.close()
-
-
-    print('line 123')
     
 def connectToDB():
     try:
