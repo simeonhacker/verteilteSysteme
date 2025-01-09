@@ -59,11 +59,11 @@ def writeDataToDB():
             INSERT INTO DATA_ENTRIES (status, sector, year, gender, value)
             VALUES (%s, %s, %s, %s, %s)
         """, (
-            status_map[row['status']],
-            sector_map[row['sector']],
-            int(row['year']),
-            gender_map[row['gender']],
-            int(row['value'])
+            status_map[row['STATUS']],
+            sector_map[row['DETAILS_DE']],
+            int(row['PERIOD']),
+            gender_map[row['GENDER_DE']],
+            int(row['VALUE'])
         ))
 
     cursor.connection.commit()
