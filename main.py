@@ -73,35 +73,35 @@ def writeDataToDB():
 def createTables():
     # Simeon
     genders = '''
-        CREATE TABLE GENDERS (
+        CREATE TABLE IF NOT EXISTS GENDERS (
             id INT NOT NULL AUTO_INCREMENT,
             gender VARCHAR(255),
             PRIMARY KEY (id)
         )
     '''
     nationalities = '''
-        CREATE TABLE NATIONALITIES (
+        CREATE TABLE IF NOT EXISTS NATIONALITIES (
             id INT NOT NULL AUTO_INCREMENT,
             nationality VARCHAR(255),
             PRIMARY KEY (id)
         )
     '''
     sectors = '''
-        CREATE TABLE SECTORS (
+        CREATE TABLE IF NOT EXISTS SECTORS (
             id INT NOT NULL AUTO_INCREMENT,
             sector VARCHAR(255),
             PRIMARY KEY (id)
         )
     '''
     statuses = '''
-        CREATE TABLE STATUS (
+        CREATE TABLE IF NOT EXISTS STATUS (
             id INT NOT NULL AUTO_INCREMENT,
             status VARCHAR(255),
             PRIMARY KEY (id)
         )
     '''
     dataEntries = '''
-        CREATE TABLE DATA_ENTRIES (
+        CREATE TABLE IF NOT EXISTS DATA_ENTRIES (
             id INT NOT NULL AUTO_INCREMENT,
             status INT,
             sector INT,
