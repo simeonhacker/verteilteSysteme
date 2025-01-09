@@ -14,10 +14,10 @@ def fetchDataFromDB():
             cursor = connection.cursor(dictionary=True)
             # Example query: Fetching data from DATA_ENTRIES table
             query = """
-            SELECT year, gender, SUM(value) AS total_value
+            SELECT year, GENDERS.gender, SUM(value) AS total_value
             FROM DATA_ENTRIES
             INNER JOIN GENDERS ON DATA_ENTRIES.gender = GENDERS.id
-            GROUP BY year, gender
+            GROUP BY year, GENDERS.gender
             ORDER BY year ASC;
             """
             cursor.execute(query)
