@@ -116,15 +116,17 @@ def createTables():
 
     queries = [genders, nationalities, sectors, statuses, dataEntries]
     print('Line 119')
-    cursor = connectToDB()
+    
     for query in queries:
+        cursor = connectToDB()
         cursor.execute(query)
+        cursor.connection.commit()  
+        cursor.close()
+        cursor.connection.close()
+
 
     print('line 123')
-    cursor.connection.commit()  
-    cursor.close()
-    cursor.connection.close()
-
+    
 def connectToDB():
     try:
         connection = mysql.connector.connect(**connectionDetails)
