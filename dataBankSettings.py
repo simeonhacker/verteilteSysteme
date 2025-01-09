@@ -1,5 +1,5 @@
 connectionDetails = {
-    'host': '127.0.0.1',
+    'host': '0.0.0.0',
     'user': 'handson',
     'password': 'handson',
     'database': 'data_base',
