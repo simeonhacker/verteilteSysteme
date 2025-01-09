@@ -118,11 +118,11 @@ def createTables():
     print('Line 119')
     
     for query in queries:
-        cursor = connectToDB()
-        cursor.execute(query)
-        cursor.connection.commit()  
-        cursor.close()
-        cursor.connection.close()
+        connection = connectToDB()
+        connection.execute(query)
+        connection.connection.commit()  
+        connection.close()
+        #connection.connection.close()
 
 
     print('line 123')
@@ -131,8 +131,7 @@ def connectToDB():
     try:
         connection = mysql.connector.connect(**connectionDetails)
         if connection.is_connected():
-            cursor = connection.cursor()
-            return cursor
+            return connection
     except Error as e:
         print(f"Error connecting to MySQL Database: {e}")
         return None
