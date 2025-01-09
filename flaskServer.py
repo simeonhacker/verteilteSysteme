@@ -37,6 +37,7 @@ def index():
     
     # Convert data to a DataFrame for easier manipulation
     df = pd.DataFrame(db_data)
+    print(df.columns)
     
     # Create a Plotly chart
     fig = go.Figure()
