@@ -4,64 +4,40 @@ from mysql.connector import Error
 import plotly.graph_objs as go
 import pandas as pd
 from dataBankSettings import connectionDetails
+import main as db
 
 app = Flask(__name__)
 
-def fetchDataFromDB():
-    try:
-        connection = mysql.connector.connect(**connectionDetails)
-        if connection.is_connected():
-            cursor = connection.cursor(dictionary=True)
-            # Example query: Fetching data from DATA_ENTRIES table
-            query = """
-            SELECT year, GENDERS.gender, SUM(value) AS total_value
-            FROM DATA_ENTRIES
-            INNER JOIN GENDERS ON DATA_ENTRIES.gender = GENDERS.id
-            GROUP BY year, GENDERS.gender
-            ORDER BY year ASC;
-            """
-            cursor.execute(query)
-            data = cursor.fetchall()
-            print(data)
-            cursor.close()
-            connection.close()
-            return data
-    except Error as e:
-        print(f"Error fetching data from database: {e}")
-        return []
+def getDataForPlot():
+    connection = db.connectToDB()
+    if not connection:
+        return None, None
 
-@app.route('/')
-def index():
-    # Fetch data
-    db_data = fetchDataFromDB()
-    
-    # Convert data to a DataFrame for easier manipulation
-    df = pd.DataFrame(db_data)
-    print(df.columns)
-    
-    # Create a Plotly chart
-    fig = go.Figure()
+    cursor = connection.cursor()
 
-    # Add traces for each gender
-    for gender in df['gender'].unique():
-        gender_data = df[df['gender'] == gender]
-        fig.add_trace(go.Scatter(
-            x=gender_data['year'],
-            y=gender_data['total_value'],
-            mode='lines+markers',
-            name=gender
-        ))
+    # Query distinct years
+    cursor.execute("SELECT DISTINCT year FROM DATA_ENTRIES")
+    years = cursor.fetchall()
+    x_axes1 = [year[0] for year in years]
 
-    # Customize the layout
-    fig.update_layout(
-        title="Data Entries Over Time by Gender",
-        xaxis_title="Year",
-        yaxis_title="Total Value",
-        template="plotly_dark"
-    )
+    y_axes1 = []
+    for year in x_axes1:
+        cursor.execute("""
+            SELECT value FROM DATA_ENTRIES
+            JOIN SECTORS ON DATA_ENTRIES.sector = SECTORS.id
+            JOIN GENDERS ON DATA_ENTRIES.gender = GENDERS.id
+            WHERE year = %s AND SECTORS.sector = 'total' AND GENDERS.gender = 'total'
+        """, (year,))
+        values = cursor.fetchall()
+        y_axes1.append([value[0] for value in values])
+        print(y_axes1)
+        print(x_axes1)
 
-    # Render the chart in the Flask template
-    return render_template('index.html', plot=fig.to_html())
+    cursor.close()
+    connection.close()
+
+    return x_axes1, y_axes1
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0')
+    #app.run(debug=True, host='0.0.0.0')
+    getDataForPlot()
