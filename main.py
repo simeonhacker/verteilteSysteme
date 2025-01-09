@@ -120,6 +120,7 @@ def createTables():
     for query in queries:
         cursor.execute(query)
 
+    print('line 123')
     cursor.connection.commit()  
     cursor.close()
     cursor.connection.close()
