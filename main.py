@@ -75,28 +75,28 @@ def createTables():
         CREATE TABLE GENDERS (
             id INT NOT NULL AUTO_INCREMENT,
             gender VARCHAR(255),
-            PRIMARY_KEY (id)
+            PRIMARY KEY (id)
         )
     '''
     nationalities = '''
         CREATE TABLE NATIONALITIES (
             id INT NOT NULL AUTO_INCREMENT,
             nationality VARCHAR(255),
-            PRIMARY_KEY (id)
+            PRIMARY KEY (id)
         )
     '''
     sectors = '''
         CREATE TABLE SECTORS (
             id INT NOT NULL AUTO_INCREMENT,
             sector VARCHAR(255),
-            PRIMARY_KEY (id)
+            PRIMARY KEY (id)
         )
     '''
     statuses = '''
         CREATE TABLE STATUS (
             id INT NOT NULL AUTO_INCREMENT,
             status VARCHAR(255),
-            PRIMARY_KEY (id)
+            PRIMARY KEY (id)
         )
     '''
     dataEntries = '''
@@ -110,7 +110,7 @@ def createTables():
             FOREIGN KEY (status) REFERENCES STATUS(id),
             FOREIGN KEY (sector) REFERENCES SECTORS(id),
             FOREIGN KEY (gender) REFERENCES GENDERS(id),
-            PRIMARY_KEY (id)
+            PRIMARY KEY (id)
         )
     '''
 
