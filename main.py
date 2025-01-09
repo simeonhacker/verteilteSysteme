@@ -71,7 +71,6 @@ def writeDataToDB():
 
 def createTables():
     # Simeon
-    cursor = connectToDB()
     genders = '''
         CREATE TABLE GENDERS (
             id INT NOT NULL AUTO_INCREMENT,
@@ -117,6 +116,7 @@ def createTables():
 
     queries = [genders, nationalities, sectors, statuses, dataEntries]
     print('Line 119')
+    cursor = connectToDB()
     for query in queries:
         cursor.execute(query)
 
