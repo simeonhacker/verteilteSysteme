@@ -61,8 +61,7 @@ def index():
     )
 
     # Render the chart in the Flask template
-    chart = fig.to_html(full_html=False)
-    return render_template('index.html', chart=chart)
+    return render_template('index.html', plot=fig.to_html())
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')
