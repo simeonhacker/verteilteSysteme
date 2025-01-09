@@ -56,7 +56,7 @@ def writeDataToDB():
     # Insert main data
     
     for row in data:
-        value = None if not row['VALUE'] else int(row['VALUE'])
+        value = None if not row['VALUE'] else int(float(row['VALUE']))
         cursor.execute("""
             INSERT INTO DATA_ENTRIES (status, sector, year, gender, value)
             VALUES (%s, %s, %s, %s, %s)
