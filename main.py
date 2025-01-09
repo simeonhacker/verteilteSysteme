@@ -23,10 +23,10 @@ def writeDataToDB():
         data = list(csv_reader)
 
     # Extract distinct values
-    distinct_genders = set(row['gender'] for row in data)
-    distinct_statuses = set(row['status'] for row in data)
-    distinct_nationalities = set(row['nationality'] for row in data)
-    distinct_sectors = set(row['sector'] for row in data)
+    distinct_genders = set(row['GENDER_DE'] for row in data)
+    distinct_statuses = set(row['STATUS'] for row in data)
+    distinct_nationalities = set(row['NAT_DE'] for row in data)
+    distinct_sectors = set(row['DETAILS_DE'] for row in data)
 
     # Insert distinct values and get id mappings
     gender_map = {}
