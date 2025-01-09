@@ -68,9 +68,9 @@ def writeDataToDB():
             value
         ))
 
-    cursor.connection.commit()
+    connection.commit()
     cursor.close()
-    cursor.connection.close()
+    connection.close()
 
 def createTables():
     # Simeon
