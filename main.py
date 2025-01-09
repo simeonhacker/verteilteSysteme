@@ -128,7 +128,8 @@ def connectToDB():
     try:
         connection = mysql.connector.connect(**connectionDetails)
         if connection.is_connected():
-            return connection.cursor()
+            cursor = connection.cursor()
+            return cursor
     except Error as e:
         print(f"Error connecting to MySQL Database: {e}")
         return None
