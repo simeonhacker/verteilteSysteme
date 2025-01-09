@@ -16,6 +16,16 @@ def writeDataToDB():
     cursor = connection.cursor()
     if not cursor:
         return
+    
+    # ensure tables are empty
+    cursor.execute("DELETE FROM DATA_ENTRIES")
+    cursor.execute("DELETE FROM STATUS")
+    cursor.execute("DELETE FROM SECTORS")
+    cursor.execute("DELETE FROM GENDERS")
+    cursor.execute("DELETE FROM NATIONALITIES")
+
+    connection.commit()  # Commit the deletions
+
 
     # Read CSV file
     with open('data.csv', 'r') as file:
