@@ -54,7 +54,9 @@ def writeDataToDB():
         sector_map[sector] = cursor.fetchone()[0]
 
     # Insert main data
+    
     for row in data:
+        value = None if not row['value'] else int(row['value'])
         cursor.execute("""
             INSERT INTO DATA_ENTRIES (status, sector, year, gender, value)
             VALUES (%s, %s, %s, %s, %s)
@@ -63,7 +65,7 @@ def writeDataToDB():
             sector_map[row['DETAILS_DE']],
             int(row['PERIOD']),
             gender_map[row['GENDER_DE']],
-            int(row['VALUE'])
+            value
         ))
 
     cursor.connection.commit()
