@@ -22,6 +22,7 @@ def fetchDataFromDB():
             """
             cursor.execute(query)
             data = cursor.fetchall()
+            print(data)
             cursor.close()
             connection.close()
             return data
