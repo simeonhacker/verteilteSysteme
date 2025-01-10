@@ -68,8 +68,8 @@ def writeDataToDB():
     for row in data:
         value = None if not row['VALUE'] else int(float(row['VALUE']))
         cursor.execute("""
-            INSERT INTO DATA_ENTRIES (status, sector, year, gender, value)
-            VALUES (%s, %s, %s, %s, %s)
+            INSERT INTO DATA_ENTRIES (status, sector, year, gender, nationality, value)
+            VALUES (%s, %s, %s, %s, %s, %s)
         """, (
             status_map[row['STATUS']],
             sector_map[row['DETAILS_DE']],
