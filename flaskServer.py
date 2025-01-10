@@ -59,7 +59,7 @@ def getDataForPlot2():
             JOIN SECTORS ON DATA_ENTRIES.sector = SECTORS.id
             JOIN GENDERS ON DATA_ENTRIES.gender = GENDERS.id
             JOIN NATIONALITIES ON DATA_ENTRIES.nationality = NATIONALITIES.id
-            WHERE year = %s AND SECTORS.sector = 'Total' AND GENDERS.gender = 'Frauen' AND NATIONALITIES.nationality = 'Total'
+            WHERE year = %s AND SECTORS.sector = 'Total' AND GENDERS.gender = 'Männer' AND NATIONALITIES.nationality = 'Total'
         """, (year,))
         values = cursor.fetchall()
         y_axes1.extend([value[0] for value in values])
@@ -81,8 +81,6 @@ def plot():
     data2 = getDataForPlot2()
     labels2 = data2[0]
     values2 = data2[1]
-
-    print(values2)
 
     return render_template('plot.html', labels=labels, values=values, labels2=labels2, values2=values2)
 
