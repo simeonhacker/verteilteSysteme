@@ -150,5 +150,5 @@ def connectToDB():
         
 if __name__ == "__main__":
     createTables()
-    getDataFromWeb()
+    #getDataFromWeb()
     writeDataToDB()
