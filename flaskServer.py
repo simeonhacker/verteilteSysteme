@@ -36,7 +36,7 @@ def getDataForPlot():
     cursor.close()
     connection.close()
 
-    return x_axes1, y_axes1
+    return x_axes1#, y_axes1
 
 if __name__ == "__main__":
     #app.run(debug=True, host='0.0.0.0')
