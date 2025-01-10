@@ -20,7 +20,7 @@ def getDataForPlot():
     years = cursor.fetchall()
     x_axes1 = [year[0] for year in years]
 
-    y_axes1 = []
+    '''y_axes1 = []
     for year in x_axes1:
         cursor.execute("""
             SELECT value FROM DATA_ENTRIES
@@ -31,7 +31,7 @@ def getDataForPlot():
         values = cursor.fetchall()
         y_axes1.append([value[0] for value in values])
         print(y_axes1)
-        print(x_axes1)
+        print(x_axes1)'''
 
     cursor.close()
     connection.close()
