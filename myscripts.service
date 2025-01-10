@@ -4,8 +4,8 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/python3 /home/handson/verteilteSysteme/main.py
-ExecStartPost=/usr/bin/python3 /home/handson/verteilteSysteme/flaskServer.py
+ExecStart= bin/bash -c "source /home/handson/verteilteSysteme/env/bin/activate && python3 main.py"
+ExecStartPost= bin/bash -c "source /home/handson/verteilteSysteme/env/bin/activate && python3 flaskServer.py"
 Restart=on-failure
 
 [Install]
