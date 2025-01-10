@@ -82,7 +82,7 @@ def plot():
     labels2 = data2[0]
     values2 = data2[1]
 
-    print('values:' + values2)
+    print(values2)
 
     return render_template('plot.html', labels=labels, values=values, labels2=labels2, values2=values2)
 
