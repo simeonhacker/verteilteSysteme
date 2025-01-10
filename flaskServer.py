@@ -29,7 +29,8 @@ def getDataForPlot():
             JOIN NATIONALITIES ON DATA_ENTRIES.nationality = NATIONALITIES.id
             WHERE year = %s AND SECTORS.sector = 'Total' AND GENDERS.gender = 'Total' AND NATIONALITIES.nationality = 'Total'
         """, (year,))
-        y_axes1 = cursor.fetchall()
+        values = cursor.fetchall()
+        y_axes1.extend([value[0] for value in values])
 
     print(y_axes1)
     print(x_axes1)
