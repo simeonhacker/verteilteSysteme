@@ -120,12 +120,10 @@ def createTables():
             sector INT,
             year INT,
             gender INT,
-            nationality INT,
             value INT,
             FOREIGN KEY (status) REFERENCES STATUS(id),
             FOREIGN KEY (sector) REFERENCES SECTORS(id),
             FOREIGN KEY (gender) REFERENCES GENDERS(id),
-            FOREIGN KEY (nationality) REFERENCES NATIONALITIES(id),
             PRIMARY KEY (id)
         )
     '''
