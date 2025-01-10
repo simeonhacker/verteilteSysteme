@@ -75,6 +75,7 @@ def writeDataToDB():
             sector_map[row['DETAILS_DE']],
             int(row['PERIOD']),
             gender_map[row['GENDER_DE']],
+            nationality_map[row['NAT_DE']],
             value
         ))
 
