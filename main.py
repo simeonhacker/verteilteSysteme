@@ -2,7 +2,8 @@ import csv
 import requests
 import mysql.connector
 from mysql.connector import Error
-from dataBankSettings import connectionDetails
+from dataBankSettings import connectionDetails 
+import time
 
 def getDataFromWeb():
     # Simeon
@@ -151,5 +152,6 @@ def connectToDB():
         
 if __name__ == "__main__":
     createTables()
-    #getDataFromWeb()
+    getDataFromWeb()
     writeDataToDB()
+    time.sleep(3)  # Wait for the server to start

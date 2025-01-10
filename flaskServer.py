@@ -5,6 +5,7 @@ import plotly.graph_objs as go
 import pandas as pd
 from dataBankSettings import connectionDetails
 import main as db
+import time
 
 app = Flask(__name__)
 
@@ -51,4 +52,5 @@ def plot():
 
 
 if __name__ == "__main__":
+    time.sleep(15) # Wait for the server to start
     app.run(debug=True, host='0.0.0.0')
