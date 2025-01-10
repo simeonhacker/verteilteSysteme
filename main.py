@@ -1,3 +1,5 @@
+#!/home/handson/env/bin/python
+
 import csv
 import requests
 import mysql.connector
