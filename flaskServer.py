@@ -8,7 +8,7 @@ import main as db
 
 app = Flask(__name__)
 
-def getDataForPlot():
+def getDataForPlot1():
     connection = db.connectToDB()
     if not connection:
         return None, None
@@ -42,7 +42,7 @@ def getDataForPlot():
 @app.route('/plot')
 def plot():
 
-    data = getDataForPlot()
+    data = getDataForPlot1()
     labels = data[0]
     values = data[1]
 

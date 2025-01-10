@@ -1,0 +1,12 @@
+[Unit]
+Description=Run My Python Scripts on Startup
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/handson/verteilteSysteme/main.py
+ExecStartPost=/usr/bin/python3 /home/handson/verteilteSysteme/flaskServer.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
