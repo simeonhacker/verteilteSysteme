@@ -34,11 +34,11 @@
         var chart2 = new Chart(context2, {
             type: "bar", 
             data: {
-                labels: {{ labels|safe }},
+                labels: {{ labels2|safe }},
                 datasets: [
                     {
                         label: "Year",
-                        data: {{ values|safe }},
+                        data: {{ values2|safe }},
                         fill: true,
                         backgroundColor: "rgb(32, 150, 80)"
                     }
