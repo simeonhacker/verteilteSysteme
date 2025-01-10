@@ -59,7 +59,7 @@ def getDataForPlot2():
             JOIN SECTORS ON DATA_ENTRIES.sector = SECTORS.id
             JOIN GENDERS ON DATA_ENTRIES.gender = GENDERS.id
             JOIN NATIONALITIES ON DATA_ENTRIES.nationality = NATIONALITIES.id
-            WHERE year = %s AND SECTORS.sector = 'Total' AND GENDERS.gender = 'Total' AND NATIONALITIES.nationality = 'Total'
+            WHERE year = %s AND SECTORS.sector = 'Sektor II' AND GENDERS.gender = 'Total' AND NATIONALITIES.nationality = 'Total'
         """, (year,))
         values = cursor.fetchall()
         y_axes1.extend([value[0] for value in values])
