@@ -32,14 +32,23 @@ def getDataForPlot():
         values = cursor.fetchall()
         y_axes1.extend([value[0] for value in values])
 
-    print(y_axes1)
-    print(x_axes1)
+    data = [x_axes1, y_axes1]
 
     cursor.close()
     connection.close()
 
-    return x_axes1#, y_axes1
+    return data
+
+@app.route('/plot')
+def plot():
+
+    data = getDataForPlot()
+    labels = data[0]
+    values = data[1]
+
+    return render_template('plot.html', labels=labels, values=values)
+
+
 
 if __name__ == "__main__":
-    #app.run(debug=True, host='0.0.0.0')
-    getDataForPlot()
+    app.run(debug=True, host='0.0.0.0')
